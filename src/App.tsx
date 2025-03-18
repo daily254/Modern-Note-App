@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-white shadow sticky top-0 z-10">
+      <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-900">Notes</h1>
@@ -64,20 +64,24 @@ function App() {
             />
           </div>
         ) : (
-          <div className="space-y-6">
-            <button
-              onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
-            >
-              <Plus className="h-5 w-5" />
-              Create Note
-            </button>
-            <NoteList
-              key={refreshKey}
-              userId={user.id}
-              onEditNote={handleEditNote}
-              onNotesChange={() => setRefreshKey(prev => prev + 1)}
-            />
+          <div className="flex flex-col h-full">
+            <div className="mb-6">
+              <button
+                onClick={() => setIsEditing(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+              >
+                <Plus className="h-5 w-5" />
+                Create Note
+              </button>
+            </div>
+            <div className="overflow-y-auto max-h-[calc(100vh-200px)]">
+              <NoteList
+                key={refreshKey}
+                userId={user.id}
+                onEditNote={handleEditNote}
+                onNotesChange={() => setRefreshKey(prev => prev + 1)}
+              />
+            </div>
           </div>
         )}
       </main>
